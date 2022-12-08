@@ -36,8 +36,14 @@
       const input = document.querySelector('input[type="number"]');
       const result = document.querySelector("p#result");
       const worker = new Worker("fibonacci.js");
+      const worker1 = new Worker("fibonacci.js");
 
       worker.onmessage = function (event) {
+        result.textContent = event.data;
+        console.log("Got: " + event.data + "\n");
+      };
+
+      worker1.onmessage = function (event) {
         result.textContent = event.data;
         console.log("Got: " + event.data + "\n");
       };
@@ -47,9 +53,15 @@
         throw error;
       };
 
+      worker1.onerror = function (error) {
+        console.log(`Worker error: ${error.message} \n`);
+        throw error;
+      };
+
       form.onsubmit = function (event) {
         event.preventDefault();
         worker.postMessage(input.value);
+        worker1.postMessage(input.value);
         input.value = "";
       };
     </script>
