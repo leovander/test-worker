@@ -40,12 +40,12 @@
 
       worker.onmessage = function (event) {
         result.textContent = event.data;
-        console.log("Got: " + event.data + "\n");
+        console.log("Got1: " + event.data + "\n");
       };
 
       worker1.onmessage = function (event) {
         result.textContent = event.data;
-        console.log("Got: " + event.data + "\n");
+        console.log("Got2: " + event.data + "\n");
       };
 
       worker.onerror = function (error) {
